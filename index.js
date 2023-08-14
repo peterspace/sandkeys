@@ -66,7 +66,6 @@ app.post('/upload-by-link', async (req, res) => {
   res.json(url);
 });
 
-
 const photosMiddleware = multer({ dest: '/tmp' });
 app.post('/upload', photosMiddleware.array('photos', 100), async (req, res) => {
   const uploadedFiles = [];

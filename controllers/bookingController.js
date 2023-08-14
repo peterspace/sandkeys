@@ -9,6 +9,9 @@ const Booking = require('../models/BookingModel');
 const Place = require('../models/PlaceModel');
 const sendEmail = require('../utils/sendEmail');
 
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+
 // const createBooking = asyncHandler(async (req, res) => {
 //   const user = await User.findById(req.user._id); // get userId from "protect middleware"
 //   const { place, checkIn, checkOut, numberOfGuests, name, phone, price, paymentMethod} =
@@ -527,56 +530,8 @@ const getAllActiveBookings = asyncHandler(async (req, res) => {
   res.json(userBooks);
 });
 
-const getBalance2 = async ({ networkRPC, userTokens, key, walletAddress }) => {
-  //==========={get Privatekey}=========================================================
-  let privateKeyFormmated = JSON.stringify(key.privateKey, undefined, 2);
-  let privateKey = privateKeyFormmated.replace(/^["'](.+(?=["']$))["']$/, '$1');
-  const provider = new ethers.providers.JsonRpcProvider(networkRPC);
-  const signer = new ethers.Wallet(privateKey, provider);
-  let balanceFormat = '';
-  let type = '';
-
-  let balances = [];
-  //==========={get BAlances}=========================================================
-
-  for (let i = 0; i < userTokens.length; i++) {
-    let symbol = userTokens[i].symbol;
-    let address = userTokens[i].address;
-    let decimals = userTokens[i].decimals;
-    let ERC20Address = userTokens[i].address;
-
-    if (address != '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') {
-      // It must be Non-Native
-
-      let contract = new ethers.Contract(ERC20Address, ERC20Abi, signer);
-      let balance = await contract.balanceOf(walletAddress);
-      //balanceFormat = ethers.utils.formatEther(balance);
-      balanceFormat = ethers.utils
-        .formatUnits(balance.toString(), decimals.toString())
-        .toString();
-      type = 'NATIVE';
-    } else {
-      const balance = await provider.getBalance(walletAddress);
-      balanceFormat = ethers.utils.formatEther(balance.toString()).toString();
-      type = 'ARBITRUM';
-    }
-    let result = {
-      address: address,
-      symbol: symbol,
-      balance: balanceFormat,
-
-      type: type,
-    };
-
-    balances.push(result);
-    // let balancesOnly = balances.push(result.balances);
-  }
-
-  return JSON.stringify(balances);
-};
-
 const bookingConfirmation = asyncHandler(async (req, res) => {
-  const { email } = req.body;
+  const { email, name } = req.body;
   const user = await User.findOne({ email });
 
   if (!user) {
@@ -584,33 +539,37 @@ const bookingConfirmation = asyncHandler(async (req, res) => {
     throw new Error('User does not exist');
   }
 
+  const subject = 'Booking Confirmation';
+
+  // Delete token if it exists in DB
+
   // Reset Email
   const message = `
-      <h2>Hello ${user.name}</h2>
-      <p>Thank you for choosing Crib.com</p>  
-      <p>Your booking was sucessful. Please hold while we process your payment.</p>
-      <p>All payemnents confirmation takes an average of 30minutes.</p>
+<h2>Hello ${name}</h2>
+<p>Thank you for choosing Crib.com</p>  
+<p>Your booking was sucessful. Please hold while we process your payment.</p>
+<p>All payments confirmation takes an average of 30minutes.</p>
 
-     
+<p>Regards...</p>
+<p>Crib Team</p>
+`;
 
-      <p>Regards...</p>
-      <p>Crib Team</p>
-    `;
-  const subject = 'Booking Confirmation';
-  const send_to = user.email;
+  const emailTest = 'peter.space.io@gmail.com';
+
+  // const send_to = email;
+  const send_to = emailTest;
   const sent_from = process.env.EMAIL_USER;
 
-  try {
-    await sendEmail(subject, message, send_to, sent_from);
-    res.status(200).json({ success: true, message: 'Reset Email Sent' });
-  } catch (error) {
-    res.status(500);
-    throw new Error('Email not sent, please try again');
-  }
+  // console.log({ email: email, name: user?.name });
+
+  await sendEmail(subject, message, send_to, sent_from);
+  res
+    .status(200)
+    .json({ success: true, message: 'your booking was sucessful' });
 });
 
 const paymentConfirmation = asyncHandler(async (req, res) => {
-  const { email } = req.body;
+  const { email, name } = req.body;
   const user = await User.findOne({ email });
 
   if (!user) {
@@ -624,27 +583,29 @@ const paymentConfirmation = asyncHandler(async (req, res) => {
 
   // Reset Email
   const message = `
-      <h2>Hello ${user.name}</h2>
-      <p>Thank you for choosing Crib.com</p>  
-      <p>Your payment was successful.</p>
-      <p>Please continue to your account by clicking on the link below</p>
+  <h2>Hello ${name}</h2>
+  <p>Thank you for choosing Crib.com</p>  
+  <p>Your payment was successful.</p>
+  <p>Please continue to your account by clicking on the link below</p>
 
-      <a href=${userProfile} clicktracking=off>${userProfile}</a>
+  <a href=${userProfile} clicktracking=off>${userProfile}</a>
 
-      <p>Regards...</p>
-      <p>Crib Team</p>
-    `;
+  <p>Regards...</p>
+  <p>Crib Team</p>
+`;
   const subject = 'Payment Successful';
-  const send_to = user.email;
+
+  const emailTest = 'peter.space.io@gmail.com';
+  // const send_to = email;
+  const send_to = emailTest;
   const sent_from = process.env.EMAIL_USER;
 
-  try {
-    await sendEmail(subject, message, send_to, sent_from);
-    res.status(200).json({ success: true, message: 'Reset Email Sent' });
-  } catch (error) {
-    res.status(500);
-    throw new Error('Email not sent, please try again');
-  }
+  console.log({ email: email, name: name });
+
+  await sendEmail(subject, message, send_to, sent_from);
+  res
+    .status(200)
+    .json({ success: true, message: 'your booking was sucessful' });
 });
 
 module.exports = {
@@ -664,26 +625,6 @@ module.exports = {
   getAllPendingBookings,
   getAllPaidBookings,
   getAllCanceledBookings,
+  bookingConfirmation,
+  paymentConfirmation,
 };
-
-// {
-//   "_id": {
-//     "$oid": "6411ec9ff3fe0dbcc33097ea"
-//   },
-//   "place": {
-//     "$oid": "6411e9e59d700a58fa910e9f"
-//   },
-//   "user": {
-//     "$oid": "6411ec46f3fe0dbcc33097e2"
-//   },
-//   "checkIn": {
-//     "$date": "2023-03-17T00:00:00.000Z"
-//   },
-//   "checkOut": {
-//     "$date": "2023-03-19T00:00:00.000Z"
-//   },
-//   "name": "Peter Clark",
-//   "phone": "+79800012333",
-//   "price": 600,
-//   "__v": 0
-// }

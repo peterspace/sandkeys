@@ -18,9 +18,13 @@ const {
   getAllPendingBookings,
   getAllPaidBookings,
   getAllCanceledBookings,
+  bookingConfirmation,
+  paymentConfirmation,
 } = require('../controllers/bookingController');
 
 router.post('/', protect, createBooking);
+router.post('/bookingConfirmation', bookingConfirmation);
+router.post('/paymentConfirmation', paymentConfirmation);
 router.get('/', protect, getUserBookings); // modified
 router.put('/', protect, updateOwnerBooking); // by owner/admin only
 router.put('/updateBookingStatus', updateBookingsAutomatically); // by system

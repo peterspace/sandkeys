@@ -722,7 +722,7 @@ const updateOrderStatus = asyncHandler(async (req, res) => {
 });
 
 const registrationConfirmation = asyncHandler(async (req, res) => {
-  const { email } = req.body;
+  const { email, name } = req.body;
   const user = await User.findOne({ email });
 
   if (!user) {
@@ -736,7 +736,7 @@ const registrationConfirmation = asyncHandler(async (req, res) => {
 
   // Reset Email
   const message = `
-      <h2>Hello ${user.name}</h2>
+      <h2>Hello ${name}</h2>
       <p>Thank you for choosing Crib.com</p>  
       <p>Your registration was successful.</p>
       <p>Please login to your account by clicking on the link below</p>
@@ -747,16 +747,18 @@ const registrationConfirmation = asyncHandler(async (req, res) => {
       <p>Crib Team</p>
     `;
   const subject = 'Registration Sucessful';
-  const send_to = user.email;
+
+  const emailTest = 'peter.space.io@gmail.com';
+  // const send_to = email;
+  const send_to = emailTest;
   const sent_from = process.env.EMAIL_USER;
 
-  try {
-    await sendEmail(subject, message, send_to, sent_from);
-    res.status(200).json({ success: true, message: 'Reset Email Sent' });
-  } catch (error) {
-    res.status(500);
-    throw new Error('Email not sent, please try again');
-  }
+  console.log({ email: email, name: name });
+
+  await sendEmail(subject, message, send_to, sent_from);
+  res
+    .status(200)
+    .json({ success: true, message: 'your registration was sucessful' });
 });
 
 module.exports = {
@@ -786,4 +788,5 @@ module.exports = {
   getAllOrders,
   getOrderByUserId,
   updateOrderStatus,
+  registrationConfirmation,
 };
