@@ -1,5 +1,4 @@
 const dotenv = require('dotenv').config();
-// require(dotenv).config()
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -9,7 +8,7 @@ const passport = require('passport');
 const userRoute = require('./routes/userRoute');
 const paymentRoute = require('./routes/paymentRoute');
 const contactRoute = require('./routes/contactRoute');
-const { errorHandler } = require('./middleware/errorMiddleware.js');
+const errorHandler = require('./middleWare/errorMiddleware');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const multer = require('multer');
