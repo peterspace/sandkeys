@@ -1,0 +1,9 @@
+
+
+.hero {
+  /* background-image: url(/public/tablet@3x.png); */
+  background-image: url(/Hero.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}

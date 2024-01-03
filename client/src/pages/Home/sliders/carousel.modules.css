@@ -1,0 +1,68 @@
+.carousel {
+    position: relative;
+    /* border: 1px solid lightgray; */
+    /* cursor: grab;
+    overflow: hidden;
+    border-radius: 10px; */
+}
+
+.track {
+    cursor: grab;
+    overflow: hidden;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+.inner-carousel {
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    display: flex;
+    gap: 2rem;
+    transition: all 1s ease;
+}
+
+.item {
+    min-height: fit-content;
+    min-width: fit-content;
+    pointer-events: stroke;
+}
+
+/* .carousel .arrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: black;
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50px;
+    z-index: 5;
+} */
+
+.carousel .arrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    
+    margin-top: auto;
+    margin-bottom: auto;
+    /* background-color: black; */
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50px;
+    z-index: 5;
+}
+
+.carousel .arrow.left {
+    left: -1rem;
+}
+
+.carousel .arrow.right {
+    right: -1rem;
+}

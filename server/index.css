@@ -1,0 +1,240 @@
+.cribcom {
+  position: absolute;
+  top: calc(50% - 29px);
+  left: 50px;
+  font-weight: 500;
+}
+.confirmation-number-302899875 {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  font-size: var(--font-size-5xl);
+}
+.cribcom-parent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-crimson);
+  width: 1024px;
+  height: 100px;
+  overflow: hidden;
+  font-size: 48px;
+  color: var(--color-white);
+}
+.hotel-room-icon {
+  position: absolute;
+  top: 267px;
+  left: calc(50% - 462px);
+  border-radius: 18px;
+  width: 900px;
+  height: 600px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.corinth-hotels,
+.thanks-jason,
+.your-booking-in {
+  position: absolute;
+  top: 198px;
+  left: 50px;
+  font-weight: 500;
+}
+.corinth-hotels,
+.thanks-jason {
+  top: 140px;
+  font-size: var(--font-size-21xl);
+}
+.corinth-hotels {
+  top: 907px;
+  left: 52px;
+  color: var(--color-crimson);
+}
+.marata-st-saint,
+.reservation1 {
+  position: absolute;
+  top: 965px;
+  left: 52px;
+  font-weight: 500;
+}
+.reservation1 {
+  top: 10px;
+  left: 0;
+  font-weight: 600;
+}
+.night-standard-room {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-weight: 500;
+  color: var(--color-slategray);
+}
+.reservation {
+  position: relative;
+  width: 900px;
+  height: 50px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.check-in1,
+.friday-10-september {
+  position: absolute;
+  top: calc(50% - 14px);
+}
+.check-in1 {
+  left: 0;
+  font-weight: 600;
+}
+.friday-10-september {
+  right: 0;
+  font-weight: 500;
+  color: var(--color-slategray);
+}
+.booking-info,
+.booking-info-container {
+  position: absolute;
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+.booking-info {
+  top: calc(50% - 185px);
+  left: calc(50% - 450px);
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-3xs) 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.booking-info-container {
+  top: 1307px;
+  left: calc(50% - 512px);
+  width: 1024px;
+  height: 370px;
+  color: var(--color-gray-200);
+}
+.view {
+  position: absolute;
+  top: calc(50% - 14px);
+  left: calc(50% - 29px);
+  font-weight: 500;
+}
+.view-wrapper {
+  position: absolute;
+  top: calc(50% - 20px);
+  left: calc(50% - 110px);
+  border-radius: var(--br-7xs);
+  background-color: var(--color-crimson);
+  border: 1px solid var(--color-white);
+  box-sizing: border-box;
+  width: 100px;
+  height: 40px;
+  overflow: hidden;
+}
+.print {
+  position: absolute;
+  top: calc(50% - 14px);
+  left: calc(50% - 27px);
+  font-weight: 500;
+}
+.footer,
+.print-wrapper {
+  position: absolute;
+  background-color: var(--color-crimson);
+  overflow: hidden;
+}
+.print-wrapper {
+  top: calc(50% - 20px);
+  left: calc(50% + 10px);
+  border-radius: var(--br-7xs);
+  border: 1px solid var(--color-white);
+  box-sizing: border-box;
+  width: 100px;
+  height: 40px;
+}
+.footer {
+  top: 1677px;
+  left: calc(50% - 512px);
+  width: 1024px;
+  height: 60px;
+  color: var(--color-white);
+}
+.corinth-hotels-will {
+  position: absolute;
+  top: 9px;
+  left: 42px;
+  font-weight: 500;
+}
+.done-icon {
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width: 32px;
+  height: 32px;
+}
+.info-1 {
+  position: relative;
+  width: 1000px;
+  height: 50px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.the-booking-balance {
+  position: absolute;
+  top: 10px;
+  left: 42px;
+  font-weight: 500;
+}
+.more-details-are {
+  font-weight: 500;
+}
+.more-details-are-container {
+  position: absolute;
+  top: 10px;
+  left: 42px;
+}
+.general-info,
+.info-container {
+  position: absolute;
+  overflow: hidden;
+}
+.general-info {
+  top: 37px;
+  left: calc(50% - 500px);
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-3xs) 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.info-container {
+  top: 1034px;
+  left: calc(50% - 512px);
+  background-color: var(--color-white);
+  width: 1024px;
+  height: 263px;
+  color: var(--color-slategray);
+}
+/* .booking-confirmation {
+  position: relative;
+  background-color: #e4e4e7;
+  width: 100%;
+  height: 1737px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-gray-100);
+  font-family: var(--font-inter);
+} */
+
+.booking-confirmation {
+  position: relative;
+  background-color: #e4e4e7;
+  width: 1024px;
+  height: 1737px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-gray-100);
+  font-family: var(--font-inter);
+}

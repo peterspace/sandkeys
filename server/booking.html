@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+  </head>
+  <body>
+    <!-- <script type="module" src="main.js"></script> -->
+    <div class="booking-confirmation">
+      <div class="cribcom-parent">
+        <div class="cribcom">Crib.com</div>
+        <div
+          class="confirmation-number-302899875"
+          type="text"
+          id="confirmation-number"
+        >
+          Confirmation number: 302899875
+        </div>
+      </div>
+      <img
+        class="hotel-room-icon"
+        alt=""
+        src="./public/hotelroom@2x.png"
+        id="room-photo"
+        type="img"
+      />
+
+      <div class="your-booking-in">
+        Your booking in Saint Petersburg is confirmed.
+      </div>
+      <div class="thanks-jason" type="text" id="username">Thanks Jason!</div>
+      <div class="corinth-hotels" type="text" id="property-name">
+        Corinth Hotel
+      </div>
+      <div class="marata-st-saint" type="text" id="property-address">
+        25, Marata St, Saint Petersburg
+      </div>
+      <div class="booking-info-container">
+        <div class="booking-info">
+          <div class="reservation">
+            <div class="reservation1">Reservation</div>
+            <div class="night-standard-room" type="text" id="reservation">
+              1 night, Standard room
+            </div>
+          </div>
+          <div class="reservation">
+            <div class="check-in1">Check-in</div>
+            <div class="friday-10-september" type="text" id="check-in">
+              Friday 10 September 2023 (from 14:00)
+            </div>
+          </div>
+          <div class="reservation">
+            <div class="check-in1">Check-out</div>
+            <div class="friday-10-september" type="text" id="check-out">
+              Saturday 11 September 2023 (until 12:00)
+            </div>
+          </div>
+          <div class="reservation">
+            <div class="check-in1">Deposit</div>
+            <div class="friday-10-september" type="text" id="deposit">
+              2,500 RUB
+            </div>
+          </div>
+          <div class="reservation">
+            <div class="check-in1">Balance</div>
+            <div class="friday-10-september" type="text" id="balance">
+              7,500 RUB
+            </div>
+          </div>
+          <div class="reservation">
+            <div class="check-in1">Total</div>
+            <div class="friday-10-september" type="text" id="total">
+              10,000 RUB
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="view-wrapper">
+          <div class="view">View</div>
+        </div>
+        <div class="print-wrapper">
+          <div class="print">Print</div>
+        </div>
+      </div>
+      <div class="info-container">
+        <div class="general-info">
+          <div class="info-1">
+            <div
+              class="corinth-hotels-will"
+              type="text"
+              id="property-expecting"
+            >
+              Corinth Hotel will be expecting you on 10 September
+            </div>
+            <img class="done-icon" alt="" src="./public/doneicon.svg" />
+          </div>
+          <div class="info-1">
+            <div class="the-booking-balance" type="text" id="balance-info">
+              The booking balance of 7,500 RUB will be handled by Corinth Hotel
+              upon arrival.
+            </div>
+            <img class="done-icon" alt="" src="./public/doneicon1.svg" />
+          </div>
+          <div class="info-1">
+            <div class="more-details-are-container">
+              <span class="more-details-are">
+                More details are available at the “
+              </span>
+              <b>Payment</b>
+              <span class="more-details-are">” section below</span>
+            </div>
+            <img class="done-icon" alt="" src="./public/doneicon.svg" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const bookingL = localStorage.getItem('booking')
+        ? JSON.parse(localStorage.getItem('booking'))
+        : null;
+
+      const confirmationNumber = document.querySelector('.confirmation-number');
+      const roomPhoto = document.querySelector('#room-photo');
+      const username = document.querySelector('#username');
+      const propertyName = document.querySelector('#property-name');
+      const propertyAddress = document.querySelector('#property-address');
+      const reservation = document.querySelector('#reservation');
+      const checkIn = document.querySelector('#check-in');
+      const checkOut = document.querySelector('#check-out');
+      const deposit = document.querySelector('#deposit');
+      const balance = document.querySelector('#balance');
+      const total = document.querySelector('#total');
+      const propertyExpecting = document.querySelector('#property-expecting');
+      const balanceInfo = document.querySelector('#balance-info');
+
+      function updateBooking(booking) {
+        const confirmationNumberB = `Confirmation number: 302899875`;
+        const roomPhotoB = booking?.room?.photos[0]; // first photo by index
+        const usernameB = `Thanks ${booking?.name}!`;
+        const propertyNameB = booking?.room?.title;
+        const propertyAddressB = `${booking?.room?.address}, ${booking?.room?.city}`;
+        const reservationB = `${booking?.numberOfNights} night, ${booking?.room?.roomType} room`;
+        const checkInB = `${booking?.checkIn} ${booking?.year} (from ${booking?.room?.checkIn}:00)`;
+        const checkOutB = `${booking?.checkOut} ${booking?.year} (until ${booking?.room?.checkOut}:00)`;
+        const depositB = `${0.25 * booking?.totalPrice} RUB`;
+        const balanceB = `${0.75 * booking?.totalPrice} RUB`;
+        const totalB = `${booking?.totalPrice} RUB`;
+        const propertyExpectingB = `${booking?.room?.title} will be expecting you on ${booking?.checkIn}`;
+        const balanceInfoB = `The booking balance of ${
+          0.75 * booking?.totalPrice
+        } RUB will be handled by ${booking?.room?.title}
+upon arrival.`;
+
+        // confirmationNumber.innerText = confirmationNumberB;
+        // roomPhoto.innerText = roomPhotoB;
+        username.innerText = usernameB;
+        propertyName.innerText = propertyNameB;
+        propertyAddress.innerText = propertyAddressB;
+        reservation.innerText = reservationB;
+        checkIn.innerText = checkInB;
+        checkOut.innerText = checkOutB;
+        deposit.innerText = depositB;
+        balance.innerText = balanceB;
+        total.innerText = totalB;
+        propertyExpecting.innerText = propertyExpectingB;
+        balanceInfo.innerText = balanceInfoB;
+      }
+
+      updateBooking(bookingL);
+    </script>
+  </body>
+</html>

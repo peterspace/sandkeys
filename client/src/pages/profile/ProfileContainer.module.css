@@ -1,0 +1,106 @@
+.maxwell,
+.maxwellgmailcom {
+  position: absolute;
+  top: 293.61px;
+  left: 68.67px;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  line-height: 150%;
+  color: #e6e6e6;
+}
+.maxwellgmailcom {
+  top: 337.61px;
+  left: 39.02px;
+  font-size: 16px;
+  color: #757575;
+}
+.profilePhoto,
+.profilePhotoChild {
+  position: absolute;
+  border-radius: 9.36px;
+  overflow: hidden;
+}
+.profilePhotoChild {
+  top: 6.24px;
+  left: 7.8px;
+  width: 224.74px;
+  height: 271.56px;
+  object-fit: cover;
+}
+.profilePhoto {
+  top: 0;
+  left: 0;
+  background-color: #37363c;
+  width: 238.79px;
+  height: 285.61px;
+}
+.close {
+  position: absolute;
+  top: 4px;
+  left: 22px;
+  letter-spacing: -0.02em;
+  line-height: 150%;
+}
+.closeProfile {
+  position: absolute;
+  top: 465.52px;
+  left: 152.39px;
+  border-radius: 5.5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid #eb003c;
+  box-sizing: border-box;
+  width: 85px;
+  height: 30px;
+  overflow: hidden;
+  font-family: 'Roboto Mono';
+}
+.update {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% - 24.5px);
+  letter-spacing: -0.02em;
+  line-height: 150%;
+}
+.updateProfile {
+  position: absolute;
+  top: 369.61px;
+  left: calc(50% - 43px);
+  border-radius: 5.5px;
+  background-color: #242229;
+  border: 1px solid #2f2f2f;
+  box-sizing: border-box;
+  width: 85px;
+  height: 30px;
+  overflow: hidden;
+  font-family: 'Roboto Mono';
+}
+.profileInfoCard {
+  position: relative;
+  width: 238.79px;
+  height: 496.3px;
+}
+.profileContainer {
+  position: relative;
+  border-radius: 9.36px;
+  background-color: #191521;
+  border: 1.6px solid rgba(145, 107, 224, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 12.485548973083496px 15.60693645477295px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 14px;
+  color: #eb003c;
+  font-family: 'Roboto Mono';
+}
+.profileOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 1000px;
+  height: 653px;
+  overflow: hidden;
+}
