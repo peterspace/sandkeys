@@ -35,10 +35,8 @@ import Home from './pages/Home.jsx';
 import PaySuccess from './pages/payment/PaySuccess';
 import PayFailed from './pages/payment/PayFailed';
 import TestYandexPay from './pages/payment/TestYandexPay';
-//==============={New}======================================================
-// import BookingCalendar from './BookingCalendar';
-import { Auth } from './pages/auth/auth';
-// import Reset from './pages/auth/Reset';
+//==============={New}=================================
+import { Auth } from './pages/auth/Auth.jsx';
 import { Reset } from './pages/auth/Reset';
 import { Otp } from './pages/auth/Otp';
 import { ReaderCSV } from './components/readCSV/ReaderCSV';
@@ -79,21 +77,6 @@ const languages = [
   },
 ];
 
-// function AdminLayout() {
-//   // const { user } = useSelector((state) => state.user);
-
-//   const user = localStorage.getItem('user')
-//     ? JSON.parse(localStorage.getItem('user'))
-//     : null;
-
-//   const location = useLocation();
-
-//   return user?.role === "Partner" ? (
-//     <Outlet />
-//   ) : (
-//     <Navigate to="/auth" state={{ from: location }} replace />
-//   );
-// }
 
 function App() {
   const dispatch = useDispatch();
