@@ -1,14 +1,14 @@
-import { DateRange } from 'react-date-range';
-import { useEffect, useState } from 'react';
+import { DateRange } from "react-date-range";
+import { useEffect, useState } from "react";
 // import { useContext, useState } from "react";
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Slider from '../slider/Slider';
-import { slides } from '../../constants';
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Slider from "../slider/Slider";
+import { slides } from "../../constants";
 
 import {
   setType,
@@ -20,8 +20,8 @@ import {
   setGuestPhone,
   setRoomType,
   setRoomNumber,
-} from '../../redux/features/booking/bookingSlice';
-import { useDispatch } from 'react-redux';
+} from "../../redux/features/booking/bookingSlice";
+import { useDispatch } from "react-redux";
 
 const SearchMenu = (props) => {
   const {
@@ -45,19 +45,19 @@ const SearchMenu = (props) => {
 
   const handleSearch = () => {
     // dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
-    navigate('/list', { state: { destination: city, dates, options } });
+    navigate("/list", { state: { destination: city, dates, options } });
   };
 
   return (
     <>
       {/* <div className="flex flex-col bg-gray-100 rounded shadow-md"> */}
       <div className="bg-grey-200 flex flex-col rounded shadow-md">
-        <div className="flex flex-col rounded py-3 justify-start items-start sm:justify-between sm:items-center bg-grey-200 border-[1px] border-solid border-lavender">
+        <div className="flex flex-col rounded py-3 justify-start items-start sm:justify-between sm:items-center bg-grey-200 border-[1px] border-solid border-gray-500">
           <div className="text-white font-robotopy-3 sm:px-4 ml-10 flex flex-col">
             <div>City</div>
             <select
               name="city"
-              className="dropdown bg-grey-200 rounded-none text-gray-500 border border-lavender hover:text-gray-900 focus:ring-1 focus:outline-none focus:ring-blue-500 px-2 py-1"
+              className="dropdown bg-grey-200 rounded-none text-gray-500 border border-gray-500 hover:text-gray-900 focus:ring-1 focus:outline-none focus:ring-blue-500 px-2 py-1"
               value={city}
               onChange={(ev) => {
                 updateCity(ev.target.value);
@@ -76,7 +76,7 @@ const SearchMenu = (props) => {
             <div>Property</div>
             <select
               name="type"
-              className="dropdown bg-grey-200 rounded-none text-gray-500 border border-lavender hover:text-gray-900 focus:ring-1 focus:outline-none focus:ring-blue-500 px-2 py-1"
+              className="dropdown bg-grey-200 rounded-none text-gray-500 border border-gray-500 hover:text-gray-900 focus:ring-1 focus:outline-none focus:ring-blue-500 px-2 py-1"
               value={type}
               onChange={(ev) => {
                 updateType(ev.target.value);
@@ -95,7 +95,7 @@ const SearchMenu = (props) => {
             <div>Rooms</div>
             <select
               name="roomType"
-              className="dropdown bg-grey-200 rounded-none text-gray-500 border border-lavender hover:text-gray-900 focus:ring-1 focus:outline-none focus:ring-blue-500 px-2 py-1"
+              className="dropdown bg-grey-200 rounded-none text-gray-500 border border-gray-500 hover:text-gray-900 focus:ring-1 focus:outline-none focus:ring-blue-500 px-2 py-1"
               value={roomType}
               onChange={(ev) => {
                 updateRoomType(ev.target.value);
@@ -115,7 +115,7 @@ const SearchMenu = (props) => {
             <input
               type="number"
               value={numberOfGuests}
-              className="bg-grey-200  text-gray-500 border border-lavender hover:text-gray-900 focus:ring-1 focus:outline-none focus:ring-blue-500 px-2 py-1"
+              className="bg-grey-200  text-gray-500 border border-gray-500 hover:text-gray-900 focus:ring-1 focus:outline-none focus:ring-blue-500 px-2 py-1"
               onChange={(ev) => {
                 updatetNumberOfGuests(ev.target.value); // dispatch also
               }}
@@ -177,8 +177,8 @@ const SearchMenu = (props) => {
 
 export default SearchMenu;
 
-//className="text-blue-700 border border-lavender hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 mb-3 mt-1"
+//className="text-blue-700 border border-gray-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 mb-3 mt-1"
 
-//className="text-blue-700 border border-lavender hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center
+//className="text-blue-700 border border-gray-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center
 
 // className="py-3 px-4 rounded-lg bg-blue-500 text-white mr-5 border-l"

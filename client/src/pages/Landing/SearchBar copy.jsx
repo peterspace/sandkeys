@@ -1,9 +1,9 @@
-import Location1 from './Location1';
-import Date1 from './Date1';
+import Location1 from "./Location1";
+import Date1 from "./Date1";
 
 const SearchBar = () => {
   return (
-    <div className="rounded-md bg-grey-200 box-border overflow-hidden flex flex-row items-end justify-between py-5 px-[50px] text-left text-[24px] text-white font-roboto self-stretch border-[1px] border-solid border-lavender">
+    <div className="rounded-md bg-grey-200 box-border overflow-hidden flex flex-row items-end justify-between py-5 px-[50px] text-left text-[24px] text-white font-roboto self-stretch border-[1px] border-solid border-gray-500">
       <div className="relative w-[124px] h-[74px]">
         <Location1
           cityName="Moscow"
@@ -64,7 +64,7 @@ const SearchBar = () => {
           <div className="relative">Adults</div>
         </div>
       </div>
-      <div className="rounded-lg bg-darkslategrey-100 overflow-hidden flex flex-row items-center justify-center p-2 border-[1px] border-solid border-lavender">
+      <div className="rounded-lg bg-darkslategrey-100 overflow-hidden flex flex-row items-center justify-center p-2 border-[1px] border-solid border-gray-500">
         <div className="relative">Search</div>
       </div>
     </div>

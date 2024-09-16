@@ -47,7 +47,7 @@ const LandingPageContainer = () => {
           {/* side filter starts */}
           <div className="self-stretch bg-gray-200 box-border w-[200px] overflow-hidden shrink-0 flex flex-col items-center justify-start py-5 px-[50px] border-[1px] border-solid border-grey-300">
             <div className="relative w-[154px] h-[568px]">
-              <div className="absolute top-[524px] left-[0px] rounded-lg bg-darkslategray-100 overflow-hidden flex flex-row items-center justify-center p-2 text-true-white border-[1px] border-solid border-lavender">
+              <div className="absolute top-[524px] left-[0px] rounded-lg bg-darkslategray-100 overflow-hidden flex flex-row items-center justify-center p-2 text-true-white border-[1px] border-solid border-gray-500">
                 <div className="relative">Search</div>
               </div>
               <div className="absolute top-[0px] left-[0px] w-[124px] h-[74px]">
@@ -126,7 +126,7 @@ const LandingPageContainer = () => {
 
           <div className="flex-1 bg-true-white overflow-hidden flex flex-col items-start justify-start gap-[40px] text-lg text-grey-600 font-body-large">
             {/* menu filter starts */}
-            <div className="self-stretch rounded-md bg-gray-200 overflow-hidden flex flex-row items-end justify-between py-5 px-[50px] text-5xl text-gray-200 font-roboto border-[1px] border-solid border-lavender">
+            <div className="self-stretch rounded-md bg-gray-200 overflow-hidden flex flex-row items-end justify-between py-5 px-[50px] text-5xl text-gray-200 font-roboto border-[1px] border-solid border-gray-500">
               <div className="relative w-[124px] h-[74px]">
                 <div className="absolute top-[38px] left-[0px] bg-true-white overflow-hidden flex flex-row items-center justify-start p-1 gap-[8px]">
                   <div className="relative">Moscow</div>
@@ -197,7 +197,7 @@ const LandingPageContainer = () => {
                   <div className="relative">Adults</div>
                 </div>
               </div>
-              <div className="rounded-lg bg-darkslategray-100 overflow-hidden flex flex-row items-center justify-center p-2 text-true-white border-[1px] border-solid border-lavender">
+              <div className="rounded-lg bg-darkslategray-100 overflow-hidden flex flex-row items-center justify-center p-2 text-true-white border-[1px] border-solid border-gray-500">
                 <div className="relative">Search</div>
               </div>
             </div>
@@ -237,7 +237,7 @@ const LandingPageContainer = () => {
                       <div className="flex-1 relative font-semibold">
                         <span>The Hermitage,</span>
                         <span className="text-mediumslateblue">
-                          {' '}
+                          {" "}
                           Saint Petersburg
                         </span>
                       </div>
@@ -461,7 +461,7 @@ const LandingPageContainer = () => {
                       <div className="flex-1 relative font-semibold">
                         <span>The Hermitage,</span>
                         <span className="text-mediumslateblue">
-                          {' '}
+                          {" "}
                           Saint Petersburg
                         </span>
                       </div>

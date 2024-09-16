@@ -1,104 +1,104 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 
-import HeroPhoto from './Landing/HeroPhoto';
-import SearchBar from './Landing/SearchBar';
-import TestimonialRow from './Landing/TestimonialRow';
-import DestinationsFeatured from './Landing/DestinationsFeatured';
-import TypesFeatured from './Landing/TypesFeatured';
+import HeroPhoto from "./Landing/HeroPhoto";
+import SearchBar from "./Landing/SearchBar";
+import TestimonialRow from "./Landing/TestimonialRow";
+import DestinationsFeatured from "./Landing/DestinationsFeatured";
+import TypesFeatured from "./Landing/TypesFeatured";
 
-import ImageLanding from '../ImageLanding.jsx';
+import ImageLanding from "../ImageLanding.jsx";
 // import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { differenceInCalendarDays, format } from 'date-fns';
+import { useSelector, useDispatch } from "react-redux";
+import { differenceInCalendarDays, format } from "date-fns";
 
 import {
   updateRoomAvailability,
   getAllAvailableRoomsByCityAndType,
   getOneRoom,
   getAllRooms,
-} from '../redux/features/place/placeSlice.js';
+} from "../redux/features/place/placeSlice.js";
 
-import SearchMenu from '../components/header/SearchMenu.jsx';
+import SearchMenu from "../components/header/SearchMenu.jsx";
 import {
   updateRequest,
   fetchRequest,
   postRequest,
   deletRequest,
-} from '../hooks/api.js';
+} from "../hooks/api.js";
 
 const cities = [
   {
-    name: 'dubai',
-    cityEN: 'Moscow',
-    cityRU: 'Дубай',
-    cityAR: 'موسكو',
+    name: "dubai",
+    cityEN: "Moscow",
+    cityRU: "Дубай",
+    cityAR: "موسكو",
   },
   {
-    name: 'moscow',
-    cityEN: 'Moscow',
-    cityRU: 'Москва',
-    cityAR: 'موسكو',
+    name: "moscow",
+    cityEN: "Moscow",
+    cityRU: "Москва",
+    cityAR: "موسكو",
   },
   {
-    name: 'saint-petersburg',
-    cityEN: 'Saint Petersburg',
-    cityRU: 'Санкт-Петербург',
-    cityAR: 'سان بطرسبورج',
+    name: "saint-petersburg",
+    cityEN: "Saint Petersburg",
+    cityRU: "Санкт-Петербург",
+    cityAR: "سان بطرسبورج",
   },
 ];
 
 const propertyTypes = [
   {
-    name: 'hotel',
-    placeEN: 'Hotel',
-    placeRU: 'Гостиница',
-    placeAR: 'الفندق',
+    name: "hotel",
+    placeEN: "Hotel",
+    placeRU: "Гостиница",
+    placeAR: "الفندق",
   },
   {
-    name: 'hotelApart',
-    placeEN: 'Hotel Apart',
-    placeRU: 'Отель Апарт',
-    placeAR: 'فندق أبارت',
+    name: "hotelApart",
+    placeEN: "Hotel Apart",
+    placeRU: "Отель Апарт",
+    placeAR: "فندق أبارت",
   },
   {
-    name: 'apartment',
-    placeEN: 'Apartment',
-    placeRU: 'Квартира',
-    placeAR: 'شقة',
+    name: "apartment",
+    placeEN: "Apartment",
+    placeRU: "Квартира",
+    placeAR: "شقة",
   },
 ];
 
 const roomTypes = [
   {
-    name: 'Standard',
-    nameEN: 'Standard',
-    nameRU: 'Стандартный',
-    nameAR: 'معيار',
+    name: "Standard",
+    nameEN: "Standard",
+    nameRU: "Стандартный",
+    nameAR: "معيار",
   },
   {
-    name: 'Studio',
-    nameEN: 'Studio',
-    nameRU: 'Студия',
-    nameAR: 'استوديو',
+    name: "Studio",
+    nameEN: "Studio",
+    nameRU: "Студия",
+    nameAR: "استوديو",
   },
   {
-    name: 'Superior',
-    nameEN: 'Superior',
-    nameRU: 'большой',
-    nameAR: 'أرقى',
+    name: "Superior",
+    nameEN: "Superior",
+    nameRU: "большой",
+    nameAR: "أرقى",
   },
   {
-    name: 'Delux',
-    nameEN: 'Delux',
-    nameRU: 'Делюкс',
-    nameAR: 'ديلوكس',
+    name: "Delux",
+    nameEN: "Delux",
+    nameRU: "Делюкс",
+    nameAR: "ديلوكس",
   },
   {
-    name: 'Suite',
-    nameEN: 'Suite',
-    nameRU: 'люкс',
-    nameAR: 'جناح',
+    name: "Suite",
+    nameEN: "Suite",
+    nameRU: "люкс",
+    nameAR: "جناح",
   },
 ];
 
@@ -134,21 +134,21 @@ export default function Home(props) {
   const [showPlaceReady, setShowPlaceReady] = useState(false);
   const [showPlace, setShowPlace] = useState(false);
 
-  const checkInL = localStorage.getItem('checkIn')
-    ? JSON.parse(localStorage.getItem('checkIn'))
-    : '';
+  const checkInL = localStorage.getItem("checkIn")
+    ? JSON.parse(localStorage.getItem("checkIn"))
+    : "";
 
-  const checkOutL = localStorage.getItem('checkOut')
-    ? JSON.parse(localStorage.getItem('checkOut'))
-    : '';
+  const checkOutL = localStorage.getItem("checkOut")
+    ? JSON.parse(localStorage.getItem("checkOut"))
+    : "";
 
   const [checkIn, updateCheckIn] = useState(checkInL);
   console.log({ checkIn: checkIn });
   const [checkOut, updateCheckOut] = useState(checkOutL);
   console.log({ checkOut: checkOut });
   //==============={Persist User Selection with Local Stoarge}==========================================
-  const numberOfGuestsL = localStorage.getItem('maxGuests')
-    ? JSON.parse(localStorage.getItem('maxGuests'))
+  const numberOfGuestsL = localStorage.getItem("maxGuests")
+    ? JSON.parse(localStorage.getItem("maxGuests"))
     : 1;
   const [numberOfGuests, updatetNumberOfGuests] = useState(numberOfGuestsL);
   const maxGuests = Number(numberOfGuests);
@@ -156,20 +156,20 @@ export default function Home(props) {
   console.log({ maxGuests: maxGuests });
   // const [city, updateCity] = useState(cities[0].name);
   // const [city, updateCity] = useState(cities[0].name);
-  const cityL = localStorage.getItem('city')
-    ? JSON.parse(localStorage.getItem('city'))
+  const cityL = localStorage.getItem("city")
+    ? JSON.parse(localStorage.getItem("city"))
     : cities[0].name;
   const [city, updateCity] = useState(cityL);
   // console.log({ city: city });
 
-  const typeL = localStorage.getItem('propertyType')
-    ? JSON.parse(localStorage.getItem('propertyType'))
+  const typeL = localStorage.getItem("propertyType")
+    ? JSON.parse(localStorage.getItem("propertyType"))
     : propertyTypes[0].name;
   const [type, updateType] = useState(typeL);
   const propertyType = type;
   // console.log({ propertyType: propertyType });
-  const roomTypeL = localStorage.getItem('roomType')
-    ? JSON.parse(localStorage.getItem('roomType'))
+  const roomTypeL = localStorage.getItem("roomType")
+    ? JSON.parse(localStorage.getItem("roomType"))
     : roomTypes[0].name;
   const [roomType, updateRoomType] = useState(roomTypeL);
   // console.log({ roomType: roomType });
@@ -180,16 +180,18 @@ export default function Home(props) {
   const [totalRoomType, setTotalRoomType] = useState();
   // console.log({ totalRoomType: totalRoomType });
 
-  const testdate = new Date('2023-10-05T00:00:00.000+00:00');
+  const testdate = new Date("2023-10-05T00:00:00.000+00:00");
 
   const testCheckIn = checkIn ? new Date(checkIn) : null;
 
   // const date1 = testdate.getTime();
-  const date1 = new Date('2023-10-05T00:00:00.000+00:00').getTime();
+  const date1 = new Date("2023-10-05T00:00:00.000+00:00").getTime();
   const date2 = testCheckIn ? testCheckIn.getTime() : null;
 
   console.log({ date1: date1 });
   console.log({ date2: date2 });
+
+  console.log({ allRooms });
 
   if (date1 === date2) {
     console.log({ isMatch: true });
@@ -198,7 +200,7 @@ export default function Home(props) {
   }
 
   useEffect(() => {
-    localStorage.setItem('prevLocation', JSON.stringify(location?.pathname));
+    localStorage.setItem("prevLocation", JSON.stringify(location?.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -249,7 +251,7 @@ export default function Home(props) {
   const fetchAllRooms = async () => {
     try {
       const response = await fetchRequest({
-        url: '/places/rooms/allRooms',
+        url: "/places/rooms/allRooms",
       });
 
       if (response) {
@@ -275,43 +277,43 @@ export default function Home(props) {
 
   //==============={Update Persisted User Selections with Local Stoarge}==========================================
   useEffect(() => {
-    localStorage.setItem('selectedPlace', JSON.stringify(newPlace));
+    localStorage.setItem("selectedPlace", JSON.stringify(newPlace));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newPlace]);
 
   useEffect(() => {
-    localStorage.setItem('city', JSON.stringify(city));
+    localStorage.setItem("city", JSON.stringify(city));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city]);
 
   useEffect(() => {
-    localStorage.setItem('propertyType', JSON.stringify(type));
+    localStorage.setItem("propertyType", JSON.stringify(type));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type]);
 
   useEffect(() => {
-    localStorage.setItem('roomType', JSON.stringify(roomType));
+    localStorage.setItem("roomType", JSON.stringify(roomType));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomType]);
 
   useEffect(() => {
-    localStorage.setItem('maxGuests', JSON.stringify(maxGuests));
+    localStorage.setItem("maxGuests", JSON.stringify(maxGuests));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [maxGuests]);
 
   useEffect(() => {
-    localStorage.setItem('checkIn', JSON.stringify(checkIn));
+    localStorage.setItem("checkIn", JSON.stringify(checkIn));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkIn]);
 
   useEffect(() => {
-    localStorage.setItem('checkOut', JSON.stringify(checkOut));
+    localStorage.setItem("checkOut", JSON.stringify(checkOut));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkOut]);
@@ -319,7 +321,7 @@ export default function Home(props) {
 
   useEffect(() => {
     if (showPlaceReady === true) {
-      console.log('generatedPlace', newPlace);
+      console.log("generatedPlace", newPlace);
       setShowPlace(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -340,13 +342,13 @@ export default function Home(props) {
       const userData = allRooms?.filter((item) => {
         return (
           item.city.toLowerCase().includes(city?.toLowerCase()) &&
-          (item.type === propertyType || '') &&
-          (item.roomType === roomType || '') &&
+          (item.type === propertyType || "") &&
+          (item.roomType === roomType || "") &&
           (item.maxGuests === maxGuests || 1) &&
           ((Number(item.price) >= startPrice
             ? startPrice
             : 0 && Number(item.price) <= endPrice) ||
-            '' ||
+            "" ||
             null) // price range
         );
       });
@@ -355,8 +357,8 @@ export default function Home(props) {
       const userData = allRooms?.filter((item) => {
         return (
           item.city.toLowerCase().includes(city?.toLowerCase()) &&
-          (item.type === propertyType || '') &&
-          (item.roomType === roomType || '') &&
+          (item.type === propertyType || "") &&
+          (item.roomType === roomType || "") &&
           (item.maxGuests === maxGuests || 1) &&
           (Number(item.price) >= startPrice || 0) // price range
         );
@@ -382,13 +384,13 @@ export default function Home(props) {
   }
 
   useEffect(() => {
-    if (showPlace && checkIn !== '' && checkOut !== '') {
-      navigate('/placePage');
+    if (showPlace && checkIn !== "" && checkOut !== "") {
+      navigate("/placePage");
     }
   }, [showPlace, checkIn, checkOut]);
 
   const handleSearch = () => {
-    navigate('/landingPage');
+    navigate("/landingPage");
   };
 
   return (
