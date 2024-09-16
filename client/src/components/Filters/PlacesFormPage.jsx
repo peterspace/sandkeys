@@ -1,12 +1,12 @@
-import PhotosUploader from '../PhotosUploader.jsx';
-import Perks from '../Perks.jsx';
-import PaymentOptions from '../PaymentOptions.jsx';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import AccountNav from '../AccountNav';
+import PhotosUploader from "../PhotosUploader.jsx";
+import Perks from "../Perks.jsx";
+import PaymentOptions from "../PaymentOptions.jsx";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import AccountNav from "../AccountNav";
 // import AdminNav from '../AdminNav.jsx';
-import { Navigate, useParams } from 'react-router-dom';
-import RoomsPage from './RoomsPage.jsx';
+import { Navigate, useParams } from "react-router-dom";
+import RoomsPage from "./RoomsPage.jsx";
 import {
   updateType,
   updateTitle,
@@ -17,58 +17,58 @@ import {
   updateCheckOut,
   updateExtraInfo,
   updatePlaceId,
-} from '../redux/features/auth/placeSlice.js';
-import { useDispatch } from 'react-redux';
+} from "../redux/features/auth/placeSlice.js";
+import { useDispatch } from "react-redux";
 
 const cities = [
   {
-    name: 'moscow',
+    name: "saint-petersburg",
   },
   {
-    name: 'saint-petersburg',
+    name: "moscow",
   },
   {
-    name: 'dubai',
+    name: "dubai",
   },
 ];
 
 const types = [
   {
-    name: 'hotel',
+    name: "hotel",
   },
   {
-    name: 'hotelApart',
+    name: "hotelApart",
   },
   {
-    name: 'apartment',
+    name: "apartment",
   },
   {
-    name: 'resort',
+    name: "resort",
   },
 ];
 
 const availability = [
   {
-    name: 'true',
+    name: "true",
   },
   {
-    name: 'false',
+    name: "false",
   },
 ];
 
 export default function PlacesFormPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const [city, setCity] = useState(cities[0]?.name);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState("");
   const [type, setType] = useState(types[0]?.name);
   const [isAvailable, setIsAvailable] = useState(availability[0]?.name);
   const [addedPhotos, setAddedPhotos] = useState([]);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
   const [perks, setPerks] = useState([]);
   const [paymentOptions, setPaymentOptions] = useState([]);
-  const [extraInfo, setExtraInfo] = useState('');
+  const [extraInfo, setExtraInfo] = useState("");
   const [checkIn, setCheckIn] = useState(14);
   const [checkOut, setCheckOut] = useState(11);
   const [redirect, setRedirect] = useState(false);
@@ -81,7 +81,7 @@ export default function PlacesFormPage() {
     if (!id) {
       return;
     }
-    axios.get('/places/' + id).then((response) => {
+    axios.get("/places/" + id).then((response) => {
       const { data } = response;
       setTitle(data.title);
       setAddress(data.address);
@@ -138,16 +138,16 @@ export default function PlacesFormPage() {
   }
 
   const [filters, setFilters] = useState({
-    title: '',
-    perks: '',
-    extraInfo: '',
-    price: '',
-    type: '',
-    price: '',
-    unavailableDates: '',
-    maxGuests: '',
-    roomNumber: '',
-    isAvailable: '',
+    title: "",
+    perks: "",
+    extraInfo: "",
+    price: "",
+    type: "",
+    price: "",
+    unavailableDates: "",
+    maxGuests: "",
+    roomNumber: "",
+    isAvailable: "",
   });
 
   useEffect(() => {
@@ -170,8 +170,8 @@ export default function PlacesFormPage() {
   const filteredData = data.filter((item) => {
     return (
       item.title.toLowerCase().includes(filters.title.toLowerCase()) &&
-      (filters.category === '' || item.category === filters.category) &&
-      (filters.price === '' || item.price === parseInt(filters.price))
+      (filters.category === "" || item.category === filters.category) &&
+      (filters.price === "" || item.price === parseInt(filters.price))
     );
   });
 
@@ -202,23 +202,23 @@ export default function PlacesFormPage() {
       checkIn: checkIn.toString(),
       checkOut: checkOut.toString(),
     };
-    console.log('placeData', placeData);
+    console.log("placeData", placeData);
     if (id) {
       // update
-      await axios.put('/places', {
+      await axios.put("/places", {
         id,
         ...placeData,
       });
       setRedirect(true);
     } else {
       // new place
-      await axios.post('/places', placeData);
+      await axios.post("/places", placeData);
       setRedirect(true);
     }
   }
   // for admin only
   if (redirect) {
-    return <Navigate to={'/account/places'} />;
+    return <Navigate to={"/account/places"} />;
   }
 
   // TODO: add/ update rooms tab
@@ -236,7 +236,7 @@ export default function PlacesFormPage() {
               <div className="border-b mb-6">
                 <div className="py-2 flex justify-between">
                   <h2 className="text-2xl font-bold text-blue-500">
-                    {' '}
+                    {" "}
                     Add new property
                   </h2>
                   <button
@@ -250,8 +250,8 @@ export default function PlacesFormPage() {
 
               <form onSubmit={savePlace}>
                 {preInput(
-                  'Title',
-                  'Title for your place. should be short and catchy as in advertisement'
+                  "Title",
+                  "Title for your place. should be short and catchy as in advertisement"
                 )}
                 <input
                   type="text"
@@ -259,7 +259,7 @@ export default function PlacesFormPage() {
                   onChange={handleInputChange}
                   placeholder="title, for example: My lovely apt"
                 />
-                {preInput('Address', 'Address to this place')}
+                {preInput("Address", "Address to this place")}
                 <input
                   type="text"
                   value={filters?.address}
@@ -331,8 +331,8 @@ export default function PlacesFormPage() {
                 </div>
 
                 {preInput(
-                  'Payment Options',
-                  'select all the Payments Options of your place'
+                  "Payment Options",
+                  "select all the Payments Options of your place"
                 )}
                 <div className="grid mt-2 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
                   <PaymentOptions
@@ -341,7 +341,7 @@ export default function PlacesFormPage() {
                   />
                 </div>
 
-                {preInput('Perks', 'select all the perks of your place')}
+                {preInput("Perks", "select all the perks of your place")}
                 <div className="grid mt-2 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
                   <Perks selected={perks} onChange={setPerks} />
                 </div>

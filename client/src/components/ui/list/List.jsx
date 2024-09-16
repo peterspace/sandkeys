@@ -1,91 +1,91 @@
-import './list.css';
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { format } from 'date-fns';
-import { DateRange } from 'react-date-range';
-import useFetch from '../../../hooks/useFetch.js';
+import "./list.css";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { format } from "date-fns";
+import { DateRange } from "react-date-range";
+import useFetch from "../../../hooks/useFetch.js";
 
-import ListingCard from '../listings/ListingCard.jsx';
-import Container from '../Container.jsx';
-import ClientOnly from '../ClientOnly.jsx';
-import { useSelector, useDispatch } from 'react-redux';
+import ListingCard from "../listings/ListingCard.jsx";
+import Container from "../Container.jsx";
+import ClientOnly from "../ClientOnly.jsx";
+import { useSelector, useDispatch } from "react-redux";
 import {
   getOneRoom,
   getAllRooms,
-} from '../../../redux/features/place/placeSlice.js';
+} from "../../../redux/features/place/placeSlice.js";
 
 const cities = [
   {
-    name: 'dubai',
-    cityEN: 'Moscow',
-    cityRU: 'Дубай',
-    cityAR: 'موسكو',
+    name: "saint-petersburg",
+    cityEN: "Saint Petersburg",
+    cityRU: "Санкт-Петербург",
+    cityAR: "سان بطرسبورج",
   },
   {
-    name: 'moscow',
-    cityEN: 'Moscow',
-    cityRU: 'Москва',
-    cityAR: 'موسكو',
+    name: "moscow",
+    cityEN: "Moscow",
+    cityRU: "Москва",
+    cityAR: "موسكو",
   },
   {
-    name: 'saint-petersburg',
-    cityEN: 'Saint Petersburg',
-    cityRU: 'Санкт-Петербург',
-    cityAR: 'سان بطرسبورج',
+    name: "dubai",
+    cityEN: "Moscow",
+    cityRU: "Дубай",
+    cityAR: "موسكو",
   },
 ];
 
 const propertyTypes = [
   {
-    name: 'hotel',
-    placeEN: 'Hotel',
-    placeRU: 'Гостиница',
-    placeAR: 'الفندق',
+    name: "hotel",
+    placeEN: "Hotel",
+    placeRU: "Гостиница",
+    placeAR: "الفندق",
   },
   {
-    name: 'hotelApart',
-    placeEN: 'Hotel Apart',
-    placeRU: 'Отель Апарт',
-    placeAR: 'فندق أبارت',
+    name: "hotelApart",
+    placeEN: "Hotel Apart",
+    placeRU: "Отель Апарт",
+    placeAR: "فندق أبارت",
   },
   {
-    name: 'apartment',
-    placeEN: 'Apartment',
-    placeRU: 'Квартира',
-    placeAR: 'شقة',
+    name: "apartment",
+    placeEN: "Apartment",
+    placeRU: "Квартира",
+    placeAR: "شقة",
   },
 ];
 
 const roomTypes = [
   {
-    name: 'Standard',
-    nameEN: 'Standard',
-    nameRU: 'Стандартный',
-    nameAR: 'معيار',
+    name: "Standard",
+    nameEN: "Standard",
+    nameRU: "Стандартный",
+    nameAR: "معيار",
   },
   {
-    name: 'Studio',
-    nameEN: 'Studio',
-    nameRU: 'Студия',
-    nameAR: 'استوديو',
+    name: "Studio",
+    nameEN: "Studio",
+    nameRU: "Студия",
+    nameAR: "استوديو",
   },
   {
-    name: 'Superior',
-    nameEN: 'Superior',
-    nameRU: 'большой',
-    nameAR: 'أرقى',
+    name: "Superior",
+    nameEN: "Superior",
+    nameRU: "большой",
+    nameAR: "أرقى",
   },
   {
-    name: 'Delux',
-    nameEN: 'Delux',
-    nameRU: 'Делюкс',
-    nameAR: 'ديلوكس',
+    name: "Delux",
+    nameEN: "Delux",
+    nameRU: "Делюкс",
+    nameAR: "ديلوكس",
   },
   {
-    name: 'Suite',
-    nameEN: 'Suite',
-    nameRU: 'люкс',
-    nameAR: 'جناح',
+    name: "Suite",
+    nameEN: "Suite",
+    nameRU: "люкс",
+    nameAR: "جناح",
   },
 ];
 
@@ -102,21 +102,21 @@ const List = () => {
   const [children, setChildren] = useState(1);
   const [adult, setAdult] = useState(1);
 
-  const cityL = localStorage.getItem('city')
-    ? JSON.parse(localStorage.getItem('city'))
+  const cityL = localStorage.getItem("city")
+    ? JSON.parse(localStorage.getItem("city"))
     : cities[0].name;
   const [city, updateCity] = useState(cityL);
   console.log({ city: city });
 
-  const typeL = localStorage.getItem('type')
-    ? JSON.parse(localStorage.getItem('type'))
+  const typeL = localStorage.getItem("type")
+    ? JSON.parse(localStorage.getItem("type"))
     : propertyTypes[0].name;
   const [type, updateType] = useState(typeL);
   const propertyType = type;
   console.log({ propertyType: propertyType });
 
-  const roomTypeL = localStorage.getItem('roomType')
-    ? JSON.parse(localStorage.getItem('roomType'))
+  const roomTypeL = localStorage.getItem("roomType")
+    ? JSON.parse(localStorage.getItem("roomType"))
     : roomTypes[0].name;
   const [roomType, updateRoomType] = useState(roomTypeL);
   console.log({ roomType: roomType });
@@ -147,31 +147,31 @@ const List = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem('prevLocation', JSON.stringify(location?.pathname));
+    localStorage.setItem("prevLocation", JSON.stringify(location?.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //==============={Update Persisted User Selections with Local Stoarge}==========================================
   useEffect(() => {
-    localStorage.setItem('selectedPlace', JSON.stringify(newPlace));
+    localStorage.setItem("selectedPlace", JSON.stringify(newPlace));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newPlace]);
 
   useEffect(() => {
-    localStorage.setItem('city', JSON.stringify(city));
+    localStorage.setItem("city", JSON.stringify(city));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city]);
 
   useEffect(() => {
-    localStorage.setItem('propertyType', JSON.stringify(type));
+    localStorage.setItem("propertyType", JSON.stringify(type));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type]);
 
   useEffect(() => {
-    localStorage.setItem('roomType', JSON.stringify(roomType));
+    localStorage.setItem("roomType", JSON.stringify(roomType));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomType]);

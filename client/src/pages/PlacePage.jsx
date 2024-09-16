@@ -1,84 +1,84 @@
-import { useParams, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import BookingWidget from '../BookingWidget';
-import PlaceGallery from '../PlaceGallery';
-import AddressLink from '../AddressLink';
-import { getPlace } from '../services/apiService';
-import { useSelector, useDispatch } from 'react-redux';
+import { useParams, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import BookingWidget from "../BookingWidget";
+import PlaceGallery from "../PlaceGallery";
+import AddressLink from "../AddressLink";
+import { getPlace } from "../services/apiService";
+import { useSelector, useDispatch } from "react-redux";
 
 const cities = [
   {
-    name: 'dubai',
-    cityEN: 'Moscow',
-    cityRU: 'Дубай',
-    cityAR: 'موسكو',
+    name: "saint-petersburg",
+    cityEN: "Saint Petersburg",
+    cityRU: "Санкт-Петербург",
+    cityAR: "سان بطرسبورج",
   },
   {
-    name: 'moscow',
-    cityEN: 'Moscow',
-    cityRU: 'Москва',
-    cityAR: 'موسكو',
+    name: "moscow",
+    cityEN: "Moscow",
+    cityRU: "Москва",
+    cityAR: "موسكو",
   },
   {
-    name: 'saint-petersburg',
-    cityEN: 'Saint Petersburg',
-    cityRU: 'Санкт-Петербург',
-    cityAR: 'سان بطرسبورج',
+    name: "dubai",
+    cityEN: "Moscow",
+    cityRU: "Дубай",
+    cityAR: "موسكو",
   },
 ];
 
 const propertyTypes = [
   {
-    name: 'hotel',
-    placeEN: 'Hotel',
-    placeRU: 'Гостиница',
-    placeAR: 'الفندق',
+    name: "hotel",
+    placeEN: "Hotel",
+    placeRU: "Гостиница",
+    placeAR: "الفندق",
   },
   {
-    name: 'hotelApart',
-    placeEN: 'Hotel Apart',
-    placeRU: 'Отель Апарт',
-    placeAR: 'فندق أبارت',
+    name: "hotelApart",
+    placeEN: "Hotel Apart",
+    placeRU: "Отель Апарт",
+    placeAR: "فندق أبارت",
   },
   {
-    name: 'apartment',
-    placeEN: 'Apartment',
-    placeRU: 'Квартира',
-    placeAR: 'شقة',
+    name: "apartment",
+    placeEN: "Apartment",
+    placeRU: "Квартира",
+    placeAR: "شقة",
   },
 ];
 
 const roomTypes = [
   {
-    name: 'Standard',
-    nameEN: 'Standard',
-    nameRU: 'Стандартный',
-    nameAR: 'معيار',
+    name: "Standard",
+    nameEN: "Standard",
+    nameRU: "Стандартный",
+    nameAR: "معيار",
   },
   {
-    name: 'Studio',
-    nameEN: 'Studio',
-    nameRU: 'Студия',
-    nameAR: 'استوديو',
+    name: "Studio",
+    nameEN: "Studio",
+    nameRU: "Студия",
+    nameAR: "استوديو",
   },
   {
-    name: 'Superior',
-    nameEN: 'Superior',
-    nameRU: 'большой',
-    nameAR: 'أرقى',
+    name: "Superior",
+    nameEN: "Superior",
+    nameRU: "большой",
+    nameAR: "أرقى",
   },
   {
-    name: 'Delux',
-    nameEN: 'Delux',
-    nameRU: 'Делюкс',
-    nameAR: 'ديلوكس',
+    name: "Delux",
+    nameEN: "Delux",
+    nameRU: "Делюкс",
+    nameAR: "ديلوكس",
   },
   {
-    name: 'Suite',
-    nameEN: 'Suite',
-    nameRU: 'люкс',
-    nameAR: 'جناح',
+    name: "Suite",
+    nameEN: "Suite",
+    nameRU: "люкс",
+    nameAR: "جناح",
   },
 ];
 
@@ -90,72 +90,60 @@ export default function PlacePage() {
   //======================================={LOGIN REDIRECT}=====================================
   //====================================================================================================
 
-
-
   useEffect(() => {
-    localStorage.setItem('prevLocation', JSON.stringify(location?.pathname));
+    localStorage.setItem("prevLocation", JSON.stringify(location?.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-
-  const place = localStorage.getItem('selectedPlace')
-    ? JSON.parse(localStorage.getItem('selectedPlace'))
+  const place = localStorage.getItem("selectedPlace")
+    ? JSON.parse(localStorage.getItem("selectedPlace"))
     : null;
 
-  const checkIn = localStorage.getItem('checkIn')
-    ? JSON.parse(localStorage.getItem('checkIn'))
+  const checkIn = localStorage.getItem("checkIn")
+    ? JSON.parse(localStorage.getItem("checkIn"))
     : null;
 
-  const checkOut = localStorage.getItem('checkOut')
-    ? JSON.parse(localStorage.getItem('checkOut'))
+  const checkOut = localStorage.getItem("checkOut")
+    ? JSON.parse(localStorage.getItem("checkOut"))
     : null;
 
   //==========================================================================
-  const numberOfGuestsL = localStorage.getItem('maxGuests')
-    ? JSON.parse(localStorage.getItem('maxGuests'))
+  const numberOfGuestsL = localStorage.getItem("maxGuests")
+    ? JSON.parse(localStorage.getItem("maxGuests"))
     : 1;
 
   const guestNumber = Number(numberOfGuestsL);
 
-  const guestCity = localStorage.getItem('city')
-    ? JSON.parse(localStorage.getItem('city'))
+  const guestCity = localStorage.getItem("city")
+    ? JSON.parse(localStorage.getItem("city"))
     : cities[0].name;
-  const roomType = localStorage.getItem('roomType')
-    ? JSON.parse(localStorage.getItem('roomType'))
+  const roomType = localStorage.getItem("roomType")
+    ? JSON.parse(localStorage.getItem("roomType"))
     : roomTypes[0].name;
 
   const [loginRedirect, setLoginRedirect] = useState(false);
-
-  
-
- 
-
- 
-
-
 
   if (loginRedirect) {
     <Navigate to="/auth" />;
   }
 
-  let russiaTime = new Date().toLocaleString('en-Us', {
-    timeZone: 'Europe/Moscow',
-    timeStyle: 'short',
-    hourCycle: 'h24',
+  let russiaTime = new Date().toLocaleString("en-Us", {
+    timeZone: "Europe/Moscow",
+    timeStyle: "short",
+    hourCycle: "h24",
   });
-  let dubaiTime = new Date().toLocaleString('en-Us', {
-    timeZone: 'Asia/Dubai',
-    timeStyle: 'short',
-    hourCycle: 'h24',
+  let dubaiTime = new Date().toLocaleString("en-Us", {
+    timeZone: "Asia/Dubai",
+    timeStyle: "short",
+    hourCycle: "h24",
   });
 
   // new Date(checkOut?.checkOut)
   // let russiaCheckIn = new Date(place.checkIn)
-  let russiaCheckIn = new Date(place.checkIn).toLocaleString('en-Us', {
-    timeZone: 'Europe/Moscow',
-    timeStyle: 'short',
-    hourCycle: 'h12',
+  let russiaCheckIn = new Date(place.checkIn).toLocaleString("en-Us", {
+    timeZone: "Europe/Moscow",
+    timeStyle: "short",
+    hourCycle: "h12",
   });
 
   return (

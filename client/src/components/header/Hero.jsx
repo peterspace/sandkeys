@@ -1,18 +1,17 @@
-
-import { DateRange } from 'react-date-range';
-import { useEffect, useState } from 'react';
+import { DateRange } from "react-date-range";
+import { useEffect, useState } from "react";
 // import { useContext, useState } from "react";
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 // import { SearchContext } from "../../context/SearchContext";
 // import { AuthContext } from "../../context/AuthContext";
-import { selectUser } from '../../redux/features/auth/authSlice';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Slider from '../slider/Slider';
-import { slides } from '../../constants';
+import { selectUser } from "../../redux/features/auth/authSlice";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Slider from "../slider/Slider";
+import { slides } from "../../constants";
 
 import {
   setType,
@@ -22,41 +21,42 @@ import {
   setGuestNumber,
   setGuestName,
   setGuestPhone,
-} from '../../redux/features/auth/bookingSlice';
-import { useDispatch } from 'react-redux';
+} from "../../redux/features/auth/bookingSlice";
+import { useDispatch } from "react-redux";
 
 const cities = [
   {
-    name: 'moscow',
+    name: "saint-petersburg",
   },
   {
-    name: 'saint-petersburg',
+    name: "moscow",
   },
+
   {
-    name: 'dubai',
+    name: "dubai",
   },
 ];
 
 const types = [
   {
-    name: 'hotel',
+    name: "hotel",
   },
   {
-    name: 'apartment',
+    name: "apartment",
   },
   {
-    name: 'resort',
+    name: "resort",
   },
   {
-    name: 'villa',
+    name: "villa",
   },
 ];
 
 const Hero = () => {
   const dispatch = useDispatch();
 
-  const [checkIn, updateCheckIn] = useState('');
-  const [checkOut, updateCheckOut] = useState('');
+  const [checkIn, updateCheckIn] = useState("");
+  const [checkOut, updateCheckOut] = useState("");
   const [numberOfGuests, updatetNumberOfGuests] = useState(1);
   const [city, updateCity] = useState(cities[0].name);
   const [type, updateType] = useState(types[0].name);
@@ -70,7 +70,7 @@ const Hero = () => {
     <>
       <div className="flex flex-col bg-gray-100">
         <div className="flex justify-center items-center mt-6 py-10 mb-6 ml-3 sm:mt-8">
-          <Slider slides={slides}/>
+          <Slider slides={slides} />
           <h2 className="text-xl font-bold text-gray-900 sm:text-4xl lg:text-3xl xl:text-4xl">
             Explore endless comfort at Crib.com
           </h2>
@@ -153,7 +153,7 @@ const Hero = () => {
           <div className="flex flex-col py-3 px-4 border-l">
             <label>Find</label>
             <Link
-              to={'/landingPage'}
+              to={"/landingPage"}
               className="btn-primary px-3 py-2 mr-20 rounded-lg"
             >
               <svg

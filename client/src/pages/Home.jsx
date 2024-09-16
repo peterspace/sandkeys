@@ -29,10 +29,10 @@ import {
 
 const cities = [
   {
-    name: "dubai",
-    cityEN: "Moscow",
-    cityRU: "Дубай",
-    cityAR: "موسكو",
+    name: "saint-petersburg",
+    cityEN: "Saint Petersburg",
+    cityRU: "Санкт-Петербург",
+    cityAR: "سان بطرسبورج",
   },
   {
     name: "moscow",
@@ -41,11 +41,12 @@ const cities = [
     cityAR: "موسكو",
   },
   {
-    name: "saint-petersburg",
-    cityEN: "Saint Petersburg",
-    cityRU: "Санкт-Петербург",
-    cityAR: "سان بطرسبورج",
+    name: "dubai",
+    cityEN: "Moscow",
+    cityRU: "Дубай",
+    cityAR: "موسكو",
   },
+  
 ];
 
 const propertyTypes = [

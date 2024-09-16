@@ -1,12 +1,12 @@
-import PhotosUploader from '../PhotosUploader.jsx';
-import Perks from '../Perks.jsx';
-import PaymentOptions from '../PaymentOptions.jsx';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import AccountNav from '../AccountNav';
+import PhotosUploader from "../PhotosUploader.jsx";
+import Perks from "../Perks.jsx";
+import PaymentOptions from "../PaymentOptions.jsx";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import AccountNav from "../AccountNav";
 // import AdminNav from '../AdminNav.jsx';
-import { Navigate, useParams, useLocation } from 'react-router-dom';
-import RoomsPage from './RoomsPage.jsx';
+import { Navigate, useParams, useLocation } from "react-router-dom";
+import RoomsPage from "./RoomsPage.jsx";
 import {
   updateType,
   updateTitle,
@@ -20,46 +20,46 @@ import {
   updatePlaceId,
   updatePerks,
   updateRating,
-} from '../redux/features/place/placeSlice.js';
+} from "../redux/features/place/placeSlice.js";
 import {
   createPlace,
   updatePlaces,
-} from '../redux/features/place/placeSlice.js';
-import { useDispatch, useSelector } from 'react-redux';
+} from "../redux/features/place/placeSlice.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const cities = [
   {
-    name: 'moscow',
+    name: "saint-petersburg",
   },
   {
-    name: 'saint-petersburg',
+    name: "moscow",
   },
   {
-    name: 'dubai',
+    name: "dubai",
   },
 ];
 
 const types = [
   {
-    name: 'hotel',
+    name: "hotel",
   },
   {
-    name: 'hotelApart',
+    name: "hotelApart",
   },
   {
-    name: 'apartment',
+    name: "apartment",
   },
   {
-    name: 'resort',
+    name: "resort",
   },
 ];
 
 const availability = [
   {
-    name: 'true',
+    name: "true",
   },
   {
-    name: 'false',
+    name: "false",
   },
 ];
 
@@ -71,15 +71,15 @@ export default function PlacesFormPage() {
   const { user } = useSelector((state) => state.user);
   const updatedPlaces = useSelector((state) => state.place?.updatedOwnerplace);
 
-  console.log({updatedPlaces: updatedPlaces})
+  console.log({ updatedPlaces: updatedPlaces });
 
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const [city, setCity] = useState(cities[0]?.name);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState("");
   const [type, setType] = useState(types[0]?.name);
   const [isAvailable, setIsAvailable] = useState(availability[0]?.name);
   const [addedPhotos, setAddedPhotos] = useState([]);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
   const [perks, setPerks] = useState([]);
   const [paymentOptions, setPaymentOptions] = useState([]);
 
@@ -90,16 +90,15 @@ export default function PlacesFormPage() {
   // const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('prevLocation', JSON.stringify(location?.pathname));
+    localStorage.setItem("prevLocation", JSON.stringify(location?.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   useEffect(() => {
     if (!id) {
       return;
     }
-    axios.get('/places/' + id).then((response) => {
+    axios.get("/places/" + id).then((response) => {
       const { data } = response;
       // owner
       setTitle(data.title);
@@ -180,7 +179,7 @@ export default function PlacesFormPage() {
       perks,
       paymentOptions,
     };
-    console.log('placeData', placeData);
+    console.log("placeData", placeData);
     if (id) {
       // update
       // await axios.put('/places', {
@@ -205,7 +204,7 @@ export default function PlacesFormPage() {
   }
   // for admin only
   if (redirect) {
-    return <Navigate to={'/admin/account/places'} />;
+    return <Navigate to={"/admin/account/places"} />;
   }
 
   // TODO: add/ update rooms tab
@@ -223,7 +222,7 @@ export default function PlacesFormPage() {
               <div className="border-b mb-6">
                 <div className="py-2 flex justify-between">
                   <h2 className="text-2xl font-bold text-blue-500">
-                    {' '}
+                    {" "}
                     Add new property
                   </h2>
                   <button
@@ -245,8 +244,8 @@ export default function PlacesFormPage() {
 
               <form onSubmit={savePlace}>
                 {preInput(
-                  'Title',
-                  'Title for your place. should be short and catchy as in advertisement'
+                  "Title",
+                  "Title for your place. should be short and catchy as in advertisement"
                 )}
                 <input
                   type="text"
@@ -254,7 +253,7 @@ export default function PlacesFormPage() {
                   onChange={(ev) => setTitle(ev.target.value)}
                   placeholder="title, for example: My lovely apt"
                 />
-                {preInput('Address', 'Address to this place')}
+                {preInput("Address", "Address to this place")}
                 <input
                   type="text"
                   value={address}
@@ -304,19 +303,19 @@ export default function PlacesFormPage() {
                     </select>
                   </div>
                 </div>
-                {preInput('Photos', 'more = better')}
+                {preInput("Photos", "more = better")}
                 <PhotosUploader
                   addedPhotos={addedPhotos}
                   onChange={setAddedPhotos}
                 />
-                {preInput('Description', 'description of the place')}
+                {preInput("Description", "description of the place")}
                 <textarea
                   value={description}
                   onChange={(ev) => setDescription(ev.target.value)}
                 />
                 {preInput(
-                  'Payment Options',
-                  'select all the Payments Options of your place'
+                  "Payment Options",
+                  "select all the Payments Options of your place"
                 )}
                 <div className="grid mt-2 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
                   <PaymentOptions
@@ -325,7 +324,7 @@ export default function PlacesFormPage() {
                   />
                 </div>
 
-                {preInput('Perks', 'select all the perks of your place')}
+                {preInput("Perks", "select all the perks of your place")}
                 <div className="grid mt-2 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
                   <Perks selected={perks} onChange={setPerks} />
                 </div>
