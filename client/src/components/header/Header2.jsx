@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { logoutUser } from "../../services/apiService";
-import { Logout } from "../../redux/features/user/userSlice";
-import { useDispatch } from "react-redux";
-import TokenButtonLight from "../../pages/Landing/TokenButtonLight";
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { logoutUser } from '../../services/apiService';
+import { Logout } from '../../redux/features/user/userSlice';
+import { useDispatch } from 'react-redux';
+import TokenButtonLight from '../../pages/Landing/TokenButtonLight';
 
 export const Header = (props) => {
   const { setIsAuth, user, language, languages, setLanguage } = props;
@@ -12,8 +12,8 @@ export const Header = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const activeTabL = localStorage.getItem("activeTab")
-    ? JSON.parse(localStorage.getItem("activeTab"))
+  const activeTabL = localStorage.getItem('activeTab')
+    ? JSON.parse(localStorage.getItem('activeTab'))
     : 1;
 
   const [activeTab, setActiveTab] = useState(activeTabL); // default is 1
@@ -21,7 +21,7 @@ export const Header = (props) => {
   const [isLanguage, setIsLanguage] = useState(false); // default is 1
 
   useEffect(() => {
-    localStorage.setItem("activeTab", JSON.stringify(activeTab));
+    localStorage.setItem('activeTab', JSON.stringify(activeTab));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
@@ -29,7 +29,7 @@ export const Header = (props) => {
     await logoutUser();
     setIsAuth(false);
     setActiveTab(1); // back to home
-    navigate("/");
+    navigate('/');
   }
   const handleLogout = () => {
     dispatch(Logout());
@@ -79,7 +79,7 @@ export const Header = (props) => {
           <div
             className="cursor-pointer  text-white  text-center inline-block"
             onClick={() => {
-              navigate("/");
+              navigate('/');
               setActiveTab(1);
             }}
           >
@@ -93,7 +93,7 @@ export const Header = (props) => {
                   : `text-silver `
               } cursor-pointer text-center inline-block`}
               onClick={() => {
-                navigate("/landingPage");
+                navigate('/landingPage');
                 setActiveTab(2);
               }}
             >
@@ -107,7 +107,7 @@ export const Header = (props) => {
                     : `text-silver `
                 } cursor-pointer text-center inline-block`}
                 onClick={() => {
-                  navigate("/admin/register");
+                  navigate('/admin/register');
                   setActiveTab(2);
                 }}
               >
@@ -118,7 +118,7 @@ export const Header = (props) => {
         </div>
         <div className="flex flex-col md:flex-row gap-[32px] mr-[20px]">
           <>
-            {user?.role === "Partner" ? (
+            {user?.role === 'Partner' ? (
               <>
                 <div
                   className={`${
@@ -127,7 +127,7 @@ export const Header = (props) => {
                       : `text-silver `
                   } cursor-pointer text-center inline-block`}
                   onClick={() => {
-                    navigate("/admin/account/places");
+                    navigate('/admin/account/places');
                     setActiveTab(5);
                   }}
                 >
@@ -140,7 +140,7 @@ export const Header = (props) => {
                       : `text-silver `
                   } cursor-pointer text-center inline-block`}
                   onClick={() => {
-                    navigate("/admin/account/agentbookings");
+                    navigate('/admin/account/agentbookings');
                     setActiveTab(6);
                   }}
                 >
@@ -153,7 +153,7 @@ export const Header = (props) => {
                       : `text-silver `
                   } cursor-pointer text-center inline-block`}
                   onClick={() => {
-                    navigate("/admin/account");
+                    navigate('/admin/account');
                     setActiveTab(7);
                   }}
                 >
@@ -171,8 +171,8 @@ export const Header = (props) => {
               </>
             )}
           </>
-          {/* Temporarily suspended */}
-          {/* {isLanguage ? (
+
+          {isLanguage ? (
             <>
               <div className="flex flex-col gap-1 bg-gray-200 rounded-lg p-1">
                 <div
@@ -215,13 +215,7 @@ export const Header = (props) => {
               rUB={language?.symbol}
               handleclick={handleLanguage}
             />
-          )} */}
-
-          <TokenButtonLight
-            imgCard={language?.flag}
-            rUB={language?.symbol}
-            handleclick={handleLanguage}
-          />
+          )}
 
           {user?.role ? (
             <>
@@ -232,7 +226,7 @@ export const Header = (props) => {
                     : `text-silver `
                 } cursor-pointer text-center inline-block`}
                 onClick={() => {
-                  navigate("/account");
+                  navigate('/account');
                   setActiveTab(4);
                 }}
               >
@@ -251,7 +245,7 @@ export const Header = (props) => {
               className="cursor-pointer text-center inline-block"
               onClick={() => {
                 setIsAuth(true);
-                navigate("/auth");
+                navigate('/auth');
                 setActiveTab(1); // back to home
               }}
             >

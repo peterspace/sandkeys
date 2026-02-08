@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 const TestimonialRow = ({
   tripma,
@@ -36,6 +36,13 @@ const TestimonialRow = ({
       boxSizing: ratingStarRowBoxSizing2,
     };
   }, [ratingStarRowBoxSizing2]);
+
+  const testimonial1 =
+    "What a great experience using CRIB! I booked all of my hotel stays for my gap year through CRIB and never had any issues. When I had to cancel a reservation because of an emergency, CRIB customer support helped me navigate the process smoothly and got me a full refund within days. The app's interface makes comparing hotel amenities and prices so simple - I found hidden gems in every city!";
+  const testimonial2 =
+    "My family and I visit Hawaii every year, and we usually book our hotels using other services. CRIB was recommended to us by a longtime friend, and I'm so glad we tried it out! The process was easy and intuitive - we found the perfect beachfront resort with family suites that fit our budget. The loyalty points we earned on this booking already gave us a discount on our next stay!";
+  const testimonial3 =
+    "When I was looking to book my hotel in Berlin, CRIB had the best browsing experience with clear photos, honest reviews, and detailed neighborhood guides. I figured I'd give it a try for my first international trip. It was my first time using CRIB, but I'd definitely recommend it to a friend and use it for all my future travels. The price-match guarantee gave me confidence I was getting the best deal available.";
 
   return (
     <div className="flex flex-col items-center justify-start p-16 box-border gap-[24px] text-left text-[24px] text-grey-600 font-body-large self-stretch">
@@ -103,7 +110,12 @@ const TestimonialRow = ({
               </div>
             </div>
             <div className="self-stretch relative text-grey-100">
-              <span>{`What a great experience using Tripma! I booked all of my flights for my gap year through Tripma and never had any issues. When I had to cancel a flight because of an emergency, Tripma support helped me `}</span>
+              {/* <span>{`What a great experience using Tripma! I booked all of my flights for my gap year through Tripma and never had any issues. When I had to cancel a flight because of an emergency, Tripma support helped me `}</span> */}
+              <span>
+                {testimonial1.length > 100
+                  ? `${testimonial1.slice(0, 100)}... `
+                  : testimonial1}
+              </span>
               <span className="text-mediumslateblue">read more...</span>
             </div>
           </div>
@@ -122,7 +134,7 @@ const TestimonialRow = ({
               <div className="self-stretch relative">
                 <span>{`Honolulu, Hawaii `}</span>
                 <span className="text-grey-300">|</span>
-                <span> February 2017</span>
+                <span> February 2023</span>
               </div>
               <div
                 className="flex flex-row items-start justify-start pt-2 px-0 pb-0"
@@ -156,7 +168,13 @@ const TestimonialRow = ({
               </div>
             </div>
             <div className="self-stretch relative text-grey-100">
-              <span>{`My family and I visit Hawaii every year, and we usually book our flights using other services. Tripma was recommened to us by a long time friend, and I’m so glad we tried it out! The process was easy and `}</span>
+              {/* <span>{`My family and I visit Hawaii every year, and we usually book our flights using other services. Tripma was recommened to us by a long time friend, and I’m so glad we tried it out! The process was easy and `}</span> */}
+
+              <span>
+                {testimonial2.length > 100
+                  ? `${testimonial2.slice(0, 100)}... `
+                  : testimonial2}
+              </span>
               <span className="text-mediumslateblue">read more...</span>
             </div>
           </div>
@@ -209,7 +227,12 @@ const TestimonialRow = ({
               </div>
             </div>
             <div className="self-stretch relative text-grey-100">
-              <span>{`When I was looking to book my flight to Berlin from LAX, Tripma had the best browsing experiece so I figured I’d give it a try. It was my first time using Tripma, but I’d definitely recommend it to a friend and use it for `}</span>
+              {/* <span>{`When I was looking to book my flight to Berlin from LAX, Tripma had the best browsing experiece so I figured I’d give it a try. It was my first time using Tripma, but I’d definitely recommend it to a friend and use it for `}</span> */}
+              <span>
+                {testimonial3.length > 100
+                  ? `${testimonial3.slice(0, 100)}... `
+                  : testimonial3}
+              </span>
               <span className="text-mediumslateblue">read more...</span>
             </div>
           </div>
