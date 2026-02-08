@@ -1,8 +1,8 @@
-import { Outlet, Navigate, useLocation } from 'react-router-dom';
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 
 export default function LayoutPartner() {
-  const user = localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
     : null;
   const location = useLocation();
   // return (
@@ -16,7 +16,7 @@ export default function LayoutPartner() {
   // );
   return (
     <>
-      {user?.role === 'Partner' ? (
+      {user?.role === "Partner" ? (
         <Outlet />
       ) : (
         <Navigate to="/auth" state={{ from: location }} replace />
